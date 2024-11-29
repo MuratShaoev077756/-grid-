@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Grid Layout</title>
+    <style>
+        /* Сброс стилей по умолчанию */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Общие стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f8f9fa, #e8ebee); /* Светло-серый градиент */
+            color: #333;
+            margin: 0;
+            overflow-x: hidden; /* Убираем горизонтальный скролл */
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2a7b31; /* Более темный зеленый при наведении */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Анимации появления */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Основной контейнер */
+        .container {
+            display: grid;
+            grid-template-areas: 
+                "header header"
+                "sidebar main"
+                "sidebar extra"
+                "footer footer";
+            grid-template-columns: 1fr 3fr; /* Две колонки */
+            grid-template-rows: auto auto auto auto;
+            gap: 20px; /* Расстояние между элементами */
+            padding: 20px;
+            min-height: 100vh;
+            max-width: 1200px; /* Ограничиваем ширину страницы */
+            margin: 0 auto; /* Выравниваем по центру */
+        }
+
+        /* Стили для каждой области */
+        .header {
+            grid-area: header;
+            background: linear-gradient(135deg, #4CAF50, #81c784); /* Зеленый градиент */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+            animation: slideInFromTop 1s ease forwards;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+            background: #ffeb3b; /* Желтый фон */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        .main-content {
+            grid-area: main;
+            background: #ffffff; /* Белый фон */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            animation: fadeIn 1.4s ease forwards;
+        }
+
+        .extra-content {
+            grid-area: extra;
+            background: #e3f2fd; /* Светло-голубой фон */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.6s ease forwards;
+        }
+
+        .footer {
+            grid-area: footer;
+            background: linear-gradient(135deg, #333, #555); /* Темный градиент */
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.8s ease forwards;
+        }
+
+        /* Анимация при наведении */
+        .sidebar:hover, .main-content:hover, .extra-content:hover, .footer:hover {
+            transform: translateY(-5px); /* Поднимаем элемент */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Дополнительные стили для адаптивности */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-areas: 
+                    "header"
+                    "main"
+                    "extra"
+                    "sidebar"
+                    "footer";
+                grid-template-columns: 1fr; /* Одна колонка */
+            }
+
+            .header, .sidebar, .main-content, .extra-content, .footer {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 1.5rem;
+            }
+
+            .footer {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Interactive Grid Layout</h1>
+        </header>
+
+        <!-- Sidebar Section -->
+        <nav class="sidebar fade-in">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Section -->
+        <main class="main-content fade-in">
+            <h2>Main Content</h2>
+            <p>
+                Welcome to the main content area! Here you can add information, articles, or any other content 
+                that you want to highlight. This section uses a clean white background to keep the focus on the text.
+            </p>
+            <p>
+                You can also add images, videos, or other media to make this section more engaging. 
+                The layout is responsive and adjusts perfectly to different screen sizes.
+            </p>
+        </main>
+
+        <!-- Additional Section -->
+        <aside class="extra-content fade-in">
+            <h2>Extra Content</h2>
+            <p>
+                This section could be used for additional information, such as advertisements, links, or updates. 
+                The light blue background makes it visually distinct from the main content.
+            </p>
+        </aside>
+
+        <!-- Footer Section -->
+        <footer class="footer fade-in">
+            <p>&copy; 2024 Interactive Grid Layout. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
